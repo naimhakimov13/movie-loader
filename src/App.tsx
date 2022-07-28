@@ -9,12 +9,11 @@ import Film from './pages/Film'
 
 function App() {
   const { data: genres } = useGetGenresQuery()
-
   return (
     <>
       <Header />
       <div className='container mx-auto flex p-[15px]'>
-        {genres && <GenreList genreList={genres} />}
+        {genres && <GenreList genres={genres} />}
         <div className='px-[15px]'>
           <Routes>
             <Route path='film/:id' element={<Film />} />

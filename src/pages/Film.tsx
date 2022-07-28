@@ -6,11 +6,10 @@ import FilmCard from '../components/FilmCard'
 
 const Film = () => {
   const { id } = useParams()
-  const [fetchFilms, { isLoading, data, isError }] = useLazyGetGenreIdQuery()
+  const [fetchFilms, { data }] = useLazyGetGenreIdQuery()
 
   useEffect(() => {
     fetchFilms(id)
-    console.log(data)
   }, [id])
 
   return (
