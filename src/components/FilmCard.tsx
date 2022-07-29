@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { FilmInterface } from '../models/film.interface'
 
@@ -10,7 +11,7 @@ const FilmCard = ({ film }: { film: FilmInterface }) => {
   return (
     <>
       {film && (
-        <div className='card shadow-md rounded-sm'>
+        <Link to={`/movie/${film.id}`} className='card shadow-md rounded-sm'>
           <div className='card-img'>
             <img
               className='object-cover w-full'
@@ -28,7 +29,7 @@ const FilmCard = ({ film }: { film: FilmInterface }) => {
               {film.title}
             </p>
           </div>
-        </div>
+        </Link>
       )}
     </>
   )

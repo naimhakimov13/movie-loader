@@ -60,7 +60,9 @@ export interface FilmInterface {
   vote_count: number;
 }
 
-
+export interface VideoKey {
+  key: string;
+}
 
 
 
