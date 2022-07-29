@@ -1,12 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Genre } from '../../models/film.interface'
 
+const favoritesKey = 'favorites'
+
 interface FilmSliceState {
-  genre: Genre | null
+  genre: Genre | null,
+  favorites: number[]
 }
 
 const initialState: FilmSliceState = {
-  genre: null
+  genre: null,
+  favorites: JSON.parse(localStorage.getItem(favoritesKey) || '[]')
 }
 
 export const filmSlice = createSlice({
@@ -16,6 +20,14 @@ export const filmSlice = createSlice({
     selectedGenre(state, action: PayloadAction<Genre>) {
       state.genre = action.payload
     },
+    addToFavorites(state, action: PayloadAction<number>) {
+      state.favorites.push(action.payload)
+      localStorage.setItem(favoritesKey, JSON.stringify(state.favorites))
+    },
+    removeToFavorites(state, action: PayloadAction<number>) {
+      state.favorites.filter(fav => fav !== action.payload)
+      localStorage.setItem(favoritesKey, JSON.stringify(state.favorites))
+    }
   }
 })
 
