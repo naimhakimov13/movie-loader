@@ -1,10 +1,10 @@
+import { useAppSelector } from '../hooks/redux'
+
 export function Favorites() {
-  return(
+  const { favorites } = useAppSelector(state => state.film)
+  return (
     <ul>
-      <li>1</li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
+      {favorites.map(title => (<li key={title}>{title}</li>))}
     </ul>
   )
 }

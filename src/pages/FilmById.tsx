@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useGetMovieByIdQuery, useLazyGetVideoByIdQuery } from '../store/film/film.api'
 
@@ -6,18 +6,21 @@ export function FilmById() {
   const { id } = useParams()
   const { data: movie } = useGetMovieByIdQuery(id)
   const [fetchVideo, { data: videoKey }] = useLazyGetVideoByIdQuery()
+  const [onload, setOnload] = useState(false)
 
   useEffect(() => {
     fetchVideo(id)
-    console.log('render')
   }, [])
 
   return (
     <>
       {movie && (
         <div className='flex flex-wrap gap-4'>
-          <div className='flex-1'>
-            <img className="md:w-[100%]" src={'https://www.themoviedb.org/t/p/w220_and_h330_face/' + movie.backdrop_path} />
+          <div className='flex-1'
+               style={{ display: onload ? 'block' : 'none' }}>
+            <img className='md:w-[100%]'
+                  src={'https://www.themoviedb.org/t/p/w220_and_h330_face/' + movie.backdrop_path}
+                  onLoad={() => setOnload(true)} />
           </div>
           <div className='max-w-[400px]'>
             <h4>Release year: {movie?.release_date}</h4>

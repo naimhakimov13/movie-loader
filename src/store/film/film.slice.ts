@@ -5,7 +5,7 @@ const favoritesKey = 'favorites'
 
 interface FilmSliceState {
   genre: Genre | null,
-  favorites: number[]
+  favorites: string[]
 }
 
 const initialState: FilmSliceState = {
@@ -20,11 +20,11 @@ export const filmSlice = createSlice({
     selectedGenre(state, action: PayloadAction<Genre>) {
       state.genre = action.payload
     },
-    addToFavorites(state, action: PayloadAction<number>) {
+    addToFavorites(state, action: PayloadAction<string>) {
       state.favorites.push(action.payload)
       localStorage.setItem(favoritesKey, JSON.stringify(state.favorites))
     },
-    removeToFavorites(state, action: PayloadAction<number>) {
+    removeToFavorites(state, action: PayloadAction<string>) {
       state.favorites.filter(fav => fav !== action.payload)
       localStorage.setItem(favoritesKey, JSON.stringify(state.favorites))
     }

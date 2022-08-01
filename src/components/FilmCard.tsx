@@ -12,7 +12,7 @@ const FilmCard = ({ film }: { film: FilmInterface }) => {
   const [loaded, setLoaded] = useState(false)
   const { favorites } = useAppSelector(state => state.film)
   const { addToFavorites, removeToFavorites } = useActions()
-  const [isFav, setIsFav] = useState(favorites.includes(film.id))
+  const [isFav, setIsFav] = useState(favorites.includes(film.title))
 
   const notify = (message: string) => toast(message, {
     position: "top-right",
@@ -21,13 +21,13 @@ const FilmCard = ({ film }: { film: FilmInterface }) => {
 
   const onLoad = () => setLoaded(true)
 
-  const addToFavorite = (filmId: number) => {
+  const addToFavorite = (filmId: string) => {
     addToFavorites(filmId)
     setIsFav(true)
     notify('Added to favorites')
   }
 
-  const removeFromFavorite = (filmId: number) => {
+  const removeFromFavorite = (filmId: string) => {
     removeToFavorites(filmId)
     setIsFav(false)
     notify('Remove from favorites')
@@ -50,8 +50,8 @@ const FilmCard = ({ film }: { film: FilmInterface }) => {
             <h2 className='card-title flex justify-between'>
               <span>{film.vote_average}</span>
               <span className='absolute top-2 right-2'>
-                {isFav && <img onClick={() => removeFromFavorite(film.id)} src={add} alt='' />}
-                {!isFav && <img onClick={() => addToFavorite(film.id)} src={remove} alt='' />}
+                {isFav && <img onClick={() => removeFromFavorite(film.title)} src={add} alt='' />}
+                {!isFav && <img onClick={() => addToFavorite(film.title)} src={remove} alt='' />}
               </span>
             </h2>
             <div className='flex justify-between mt-2 items-center'>
