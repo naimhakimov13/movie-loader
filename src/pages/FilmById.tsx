@@ -16,8 +16,8 @@ export function FilmById() {
     <>
       {movie && (
         <div className='flex flex-wrap gap-4'>
-          <div>
-            <img src={'https://www.themoviedb.org/t/p/w220_and_h330_face/' + movie.backdrop_path} />
+          <div className='flex-1'>
+            <img className="md:w-[100%]" src={'https://www.themoviedb.org/t/p/w220_and_h330_face/' + movie.backdrop_path} />
           </div>
           <div className='max-w-[400px]'>
             <h4>Release year: {movie?.release_date}</h4>
@@ -29,7 +29,7 @@ export function FilmById() {
           </div>
 
           {videoKey &&
-          (<iframe width='560' src={'https://www.youtube.com/embed/' + videoKey} title='YouTube video player'
+          (<iframe className="max-w-[100%]" width='560' src={'https://www.youtube.com/embed/' + videoKey} title='YouTube video player'
                    frameBorder='0'
                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
                    allowFullScreen>wer</iframe>)

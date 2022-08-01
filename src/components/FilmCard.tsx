@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 
 import { FilmInterface } from '../models/film.interface'
@@ -6,29 +5,38 @@ import { useAppSelector } from '../hooks/redux'
 import { useActions } from '../hooks/actions'
 import add from '../assets/add-bookmark-icon.svg'
 import remove from '../assets/remove-bookmark-icon.svg'
+import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const FilmCard = ({ film }: { film: FilmInterface }) => {
   const [loaded, setLoaded] = useState(false)
   const { favorites } = useAppSelector(state => state.film)
   const { addToFavorites, removeToFavorites } = useActions()
-  const [isFav, setIsFav] = useState(favorites.includes(film.id));
+  const [isFav, setIsFav] = useState(favorites.includes(film.id))
+
+  const notify = (message: string) => toast(message, {
+    position: "top-right",
+    autoClose: 150
+  });
 
   const onLoad = () => setLoaded(true)
 
   const addToFavorite = (filmId: number) => {
     addToFavorites(filmId)
     setIsFav(true)
+    notify('Added to favorites')
   }
 
   const removeFromFavorite = (filmId: number) => {
     removeToFavorites(filmId)
     setIsFav(false)
+    notify('Remove from favorites')
   }
 
   return (
     <>
       {film && (
-        <div className='card shadow-md rounded-sm'>
+        <div className='card shadow-md rounded-sm relative'>
           <div className='card-img'>
             <img
               className='object-cover w-full'
@@ -41,14 +49,17 @@ const FilmCard = ({ film }: { film: FilmInterface }) => {
           <div className='card-body'>
             <h2 className='card-title flex justify-between'>
               <span>{film.vote_average}</span>
-              <span onClick={() => addToFavorites(film.id)}>
-                {isFav && <img onClick={() => removeFromFavorite(film.id)} src={remove} alt='' />}
-                {!isFav && <img onClick={() => addToFavorite(film.id)} src={add} alt='' />}
+              <span className='absolute top-2 right-2'>
+                {isFav && <img onClick={() => removeFromFavorite(film.id)} src={add} alt='' />}
+                {!isFav && <img onClick={() => addToFavorite(film.id)} src={remove} alt='' />}
               </span>
             </h2>
-            <p className='card-intro'>
-              {film.title}
-            </p>
+            <div className='flex justify-between mt-2 items-center'>
+              <p className='card-intro'>
+                {film.title}
+              </p>
+              <Link to={'/movie/' + film.id} className='bg-gray-500 text-white p-2 rounded-sm'>Open</Link>
+            </div>
           </div>
         </div>
       )}
