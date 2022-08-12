@@ -25,7 +25,7 @@ export const filmSlice = createSlice({
       localStorage.setItem(favoritesKey, JSON.stringify(state.favorites))
     },
     removeToFavorites(state, action: PayloadAction<string>) {
-      state.favorites.filter(fav => fav !== action.payload)
+      state.favorites = state.favorites.filter(fav => fav !== action.payload)
       localStorage.setItem(favoritesKey, JSON.stringify(state.favorites))
     }
   }

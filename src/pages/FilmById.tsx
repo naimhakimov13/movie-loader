@@ -26,7 +26,9 @@ export function FilmById() {
             <h4>Release year: {movie?.release_date}</h4>
             <h4>Popularity: {movie?.popularity}</h4>
             <h4>Running time: {movie?.runtime} min</h4>
-            <h4>Genre: {movie.genres.map(g => (<Link className="hover:text-gray-400 hover:underline px-1 transition-all" to={'/film/' + g.id}>{g.name + ' '}</Link>))} </h4>
+            <h4>Genre: {movie.genres.map(g =>
+              (<Link className="hover:text-gray-400 hover:underline px-1 transition-all cursor-pointer underline" to={'/film/' + g.id}>{g.name + ' '}</Link>)
+            )} </h4>
             <h4>Country:</h4>
             <h4 className='max-w-[400px]'>Overview: {movie?.overview}</h4>
           </div>
