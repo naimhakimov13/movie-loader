@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 
 import Header from './components/Header'
 import Film from './pages/Film'
@@ -19,6 +19,10 @@ function App() {
             <Route path='film/:id' element={<Film />} />
             <Route path='movie/:id' element={<FilmById />} />
             <Route path='favorites' element={<Favorites />} />
+            <Route
+              path="*"
+              element={<Navigate to="/" replace />}
+            />
           </Routes>
         </div>
       </div>
