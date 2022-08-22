@@ -4,7 +4,7 @@ import { useGetMovieByIdQuery, useLazyGetVideoByIdQuery } from '../store/film/fi
 
 export function FilmById() {
   const { id } = useParams()
-  const { data: movie } = useGetMovieByIdQuery(id)
+  const { data: movie, isError, isLoading } = useGetMovieByIdQuery(id)
   const [fetchVideo, { data: videoKey }] = useLazyGetVideoByIdQuery()
   const [onload, setOnload] = useState(false)
 
